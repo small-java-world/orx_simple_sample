@@ -5,7 +5,7 @@ orxOBJECT *pstButton = orxNULL;
 orxSTATUS orxFASTCALL Init() {
     pstButton = orxObject_CreateFromConfig("MainObject");
     if(pstButton) {
-        // orxObject_Dump(pstButton, 0);
+        orxObject_Dump(pstButton, 0);
     } else {
         orxLOG("Failed to create MainObject in Init!");
     }
@@ -16,11 +16,11 @@ orxSTATUS orxFASTCALL Run() {
     if (orxInput_HasBeenActivated("MOUSE_LEFT")) {
         orxVECTOR vMouse;
         orxMouse_GetPosition(&vMouse);
-        // orxAABOX stBox;
-        // orxObject_GetWorldBoundingBox(pstButton, &stBox);
-        // if (orxAABOX_TestPoint(&stBox, &vMouse)) {
-            orxLOG("Button clicked at (%f, %f) - Bounding box check skipped", vMouse.fX, vMouse.fY);
-        // }
+        orxAABOX stBox;
+        orxObject_GetWorldBoundingBox(pstButton, &stBox);
+        if (orxAABOX_TestPoint(&stBox, &vMouse)) {
+            orxLOG("Button clicked at (%f, %f)", vMouse.fX, vMouse.fY);
+        }
     }
     return orxSTATUS_SUCCESS;
 }
